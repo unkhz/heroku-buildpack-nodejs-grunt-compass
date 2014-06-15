@@ -4,8 +4,12 @@ Heroku buildpack: Node.js with grunt support
 Supported Grunt versions: 0.3 and 0.4.
 See the Grunt [migration guide](https://github.com/gruntjs/grunt/wiki/Upgrading-from-0.3-to-0.4) if you are upgrading from 0.3.
 
-This is a fork of [Heroku's official Node.js buildpack](https://github.com/heroku/heroku-buildpack-nodejs) with added [Grunt](http://gruntjs.com/) support.
-Using this buildpack you do not need to commit the results of your Grunt tasks (e.g. minification and concatination of files), keeping your repository clean.
+This is a fork of [Heroku's official Node.js buildpack](https://github.com/heroku/heroku-buildpack-nodejs). The following things have been included in this fork.
+  
+  * Automatic install of [Grunt](http://gruntjs.com/) from @stephanmeltzer's fork
+  * Automatic install of Compass from @stephanmeltzer's fork
+  * Automatic install of Bower components from @mathisonian's fork
+  * Possibility to install package.json devDependencies in development mode, inspired by @zeke's branch in the original buildpack
 
 After all the default Node.js and npm build tasks have finished, the buildpack checks if a Gruntfile (`Gruntfile.js`, `Gruntfile.coffee`or `grunt.js`) exists and executes the `heroku` task by running `grunt heroku`. For details about grunt and how to define tasks, check out the [offical documentation](http://gruntjs.com/getting-started). You must add grunt to the npm dependencies in your `package.json` file.
 If no Gruntfile exists, the buildpacks simply skips the grunt step and executes like the standard Node.js buildpack.
@@ -30,6 +34,8 @@ Here's an overview of what this buildpack does:
 - Runs `grunt` if a Gruntfile (`Gruntfile.js`, `Gruntfile.coffee`or `grunt.js`) is found.
 - Doesn't install grunt-cli every time.
 - Installs `compass`, caching it for future use.
+- Installs devDependencies if NODE_ENV=development
+- Installs Bower components automatically (expects bower to be installed as a local module)
 
 For more technical details, see the [heavily-commented compile script](https://github.com/stephanmelzer/heroku-buildpack-nodejs-grunt-compass/blob/master/bin/compile).
 
