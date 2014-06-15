@@ -101,10 +101,10 @@ fi
     export_env_dir $env_dir
   fi
 
-  # Include install-dev-dependencies patch from https://github.com/heroku/heroku-buildpack-nodejs/commit/e697e174c5c6dbf18ba480aeb472a5eb9479e811
-  if [ $INSTALL_DEV_DEPENDENCIES ]; then
+  # Install devDependencies if NODE_ENV = development
+  if [ "$NODE_ENV" == "development" ]; then
     status "Installing dependencies and devDependencies from package.json"
-    NODE_ENV=development npm install --userconfig $build_dir/.npmrc 2>&1 | indent
+    npm install --userconfig $build_dir/.npmrc 2>&1 | indent
   else
     status "Installing dependencies from package.json"
     npm install --userconfig $build_dir/.npmrc --production 2>&1 | indent
