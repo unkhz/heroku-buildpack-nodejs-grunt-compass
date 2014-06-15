@@ -94,15 +94,6 @@ elif test -d $cache_dir/node/node_modules; then
 
 fi
 
-# Install Bower dependencies if Bower is detected
-is_bower_present=[ -f $build_dir/bower.json ] || [ -f $build_dir/.bowerrc ];
-if $is_bower_present; then
-  status "Found bower.json, cleaning bower chache"
-  $build_dir/node_modules/.bin/bower cache clean
-  status "Running bower install"
-  $build_dir/node_modules/.bin/bower install
-fi
-
 # Scope config var availability only to `npm install`
 (
   if [ -d "$env_dir" ]; then
@@ -119,6 +110,15 @@ fi
     npm install --userconfig $build_dir/.npmrc --production 2>&1 | indent
   fi
 )
+
+# Install Bower dependencies if Bower is detected
+is_bower_present=[ -f $build_dir/bower.json ] || [ -f $build_dir/.bowerrc ];
+if $is_bower_present; then
+  status "Found bower.json, cleaning bower chache"
+  $build_dir/node_modules/.bin/bower cache clean
+  status "Running bower install"
+  $build_dir/node_modules/.bin/bower install
+fi
 
 # Persist goodies like node-version in the slug
 mkdir -p $build_dir/.heroku
