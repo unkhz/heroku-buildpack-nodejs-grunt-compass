@@ -7,9 +7,9 @@ See the Grunt [migration guide](https://github.com/gruntjs/grunt/wiki/Upgrading-
 This is a fork of [Heroku's official Node.js buildpack](https://github.com/heroku/heroku-buildpack-nodejs). The following things have been included in this fork.
   
   * Automatic install of [Grunt](http://gruntjs.com/) from @stephanmeltzer's fork
-  * Automatic install of Compass from @stephanmeltzer's fork
-  * Automatic install of Bower components from @mathisonian's fork
-  * Possibility to install package.json devDependencies in development mode, inspired by @zeke's branch in the original buildpack
+  * Automatic install of Compass from [@stephanmeltzer's fork](https://github.com/stephanmelzer/heroku-buildpack-nodejs-grunt-compass)
+  * Automatic install of Bower components from [@mathisonian's fork](https://github.com/mathisonian/heroku-buildpack-nodejs-grunt-compass-bower)
+  * Possibility to install package.json devDependencies in development mode, inspired by [@zeke's branch in the original buildpack](https://github.com/heroku/heroku-buildpack-nodejs/tree/install-dev-dependencies)
 
 After all the default Node.js and npm build tasks have finished, the buildpack checks if a Gruntfile (`Gruntfile.js`, `Gruntfile.coffee`or `grunt.js`) exists and executes the `heroku` task by running `grunt heroku`. For details about grunt and how to define tasks, check out the [offical documentation](http://gruntjs.com/getting-started). You must add grunt to the npm dependencies in your `package.json` file.
 If no Gruntfile exists, the buildpacks simply skips the grunt step and executes like the standard Node.js buildpack.
@@ -37,18 +37,18 @@ Here's an overview of what this buildpack does:
 - Installs devDependencies if NODE_ENV=development
 - Installs Bower components automatically (expects bower to be installed as a local module)
 
-For more technical details, see the [heavily-commented compile script](https://github.com/stephanmelzer/heroku-buildpack-nodejs-grunt-compass/blob/master/bin/compile).
+For more technical details, see the [heavily-commented compile script](https://github.com/unkhz/heroku-buildpack-nodejs-grunt-compass/blob/master/bin/compile).
 
 Usage
 -----
 
 Create a new app with this buildpack:
 
-    heroku create myapp --buildpack heroku config:add BUILDPACK_URL=https://github.com/stephanmelzer/heroku-buildpack-nodejs-grunt-compass.git
+    heroku create myapp --buildpack heroku config:add BUILDPACK_URL=https://github.com/unkhz/heroku-buildpack-nodejs-grunt-compass.git
 
 Or add this buildpack to your current app:
 
-    heroku config:add BUILDPACK_URL=https://github.com/stephanmelzer/heroku-buildpack-nodejs-grunt-compass.git
+    heroku config:add BUILDPACK_URL=https://github.com/unkhz/heroku-buildpack-nodejs-grunt-compass.git
 
 Set the `NODE_ENV` environment variable (e.g. `development` or `production`):
 
@@ -62,10 +62,11 @@ or
 
     grunt.registerTask('heroku:production', 'clean less mincss uglify');
 
-Don't forget to add grunt to your dependencies in `package.json`. If your grunt tasks depend on other pre-defined tasks make sure to add these dependencies as well:
+Don't forget to add Grunt and Bower to your dependencies in `package.json`. If your grunt tasks depend on other pre-defined tasks make sure to add these dependencies as well:
 
     "dependencies": {
         ...
+        "bower": "*",
         "grunt": "*",
         "grunt-contrib": "*",
         "less": "*"
