@@ -1,5 +1,5 @@
-Heroku buildpack: Node.js with grunt support
-============================================
+Heroku buildpack: Node + Grunt + Compass + Bower
+================================================
 
 Supported Grunt versions: 0.3 and 0.4.
 See the Grunt [migration guide](https://github.com/gruntjs/grunt/wiki/Upgrading-from-0.3-to-0.4) if you are upgrading from 0.3.
