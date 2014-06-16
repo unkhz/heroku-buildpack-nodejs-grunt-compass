@@ -6,7 +6,7 @@ See the Grunt [migration guide](https://github.com/gruntjs/grunt/wiki/Upgrading-
 
 This is a fork of [Heroku's official Node.js buildpack](https://github.com/heroku/heroku-buildpack-nodejs). The following things have been included in this fork.
   
-  * Automatic install of [Grunt](http://gruntjs.com/) from @stephanmeltzer's fork
+  * Automatic install of [Grunt](http://gruntjs.com/) from [@stephanmeltzer's fork](https://github.com/stephanmelzer/heroku-buildpack-nodejs-grunt-compass)
   * Automatic install of Compass from [@stephanmeltzer's fork](https://github.com/stephanmelzer/heroku-buildpack-nodejs-grunt-compass)
   * Automatic install of Bower components from [@mathisonian's fork](https://github.com/mathisonian/heroku-buildpack-nodejs-grunt-compass-bower)
   * Possibility to install package.json devDependencies in development mode, inspired by [@zeke's branch in the original buildpack](https://github.com/heroku/heroku-buildpack-nodejs/tree/install-dev-dependencies)
